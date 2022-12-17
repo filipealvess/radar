@@ -1,0 +1,44 @@
+const properties = [
+  {
+    id: 1,
+    name: 'Status',
+    options: ['Open', 'Closed', 'Escalated']
+  },
+  {
+    id: 2,
+    name: 'Time',
+    options: []
+  },
+  {
+    id: 3,
+    name: 'Assignee',
+    options: []
+  },
+  {
+    id: 4,
+    name: 'Watcher',
+    options: []
+  },
+  {
+    id: 5,
+    name: 'Counterparty',
+    options: []
+  },
+  {
+    id: 6,
+    name: 'Severity',
+    options: []
+  },
+  {
+    id: 7,
+    name: 'Source',
+    options: []
+  },
+  {
+    id: 8,
+    name: 'Trader',
+    options: []
+  }
+];
+
+export default properties;
