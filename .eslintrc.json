@@ -18,6 +18,15 @@
   ],
   "rules": {
     "header/header": 0,
-    "import/no-default-export": 0
+    "import/no-default-export": 0,
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "react/jsx-no-bind": [1, {
+      "allowArrowFunctions": true,
+      "allowFunctions": true
+    }],
+    "react/prop-types": 0
   }
 }
