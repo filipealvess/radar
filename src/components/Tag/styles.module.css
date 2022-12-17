@@ -1,0 +1,17 @@
+.container {
+	background-color: #364A58;
+  color: #D3D8DE;
+  transition: 0.3s background-color;
+}
+
+.container:not(.selected):hover {
+	background-color: #455967;
+}
+
+.container.selected {
+	background-color: #1D7324;
+}
+
+.container.selected:hover {
+  background-color: #22882a;
+}
