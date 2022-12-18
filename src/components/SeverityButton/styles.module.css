@@ -1,0 +1,7 @@
+.container {
+  width: 6%;
+}
+
+.container * {
+  color: #0082BF !important;
+}

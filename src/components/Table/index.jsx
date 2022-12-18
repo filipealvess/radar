@@ -1,26 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import { Button, Card } from '@blueprintjs/core';
+import { Card } from '@blueprintjs/core';
 
-import list from '../../controllers/alertsController';
+import SeverityButton from '../SeverityButton';
 import TableHeader from '../TableHeader';
 import TableRow from '../TableRow';
 import styles from './styles.module.css';
 
 export default function Table() {
-  const [alerts] = useState(list);
+  const alerts = useSelector(state => state.alerts.values);
 
   return (
     <section className={styles.container}>
       <Card className={styles.header}>
         <TableHeader text="Title" width={25} />
 
-        <Button
-          icon="error"
-          rightIcon="caret-down"
-          minimal={true}
-          className={styles.button}
-        />
+        <SeverityButton />
 
         <TableHeader text="Status" width={12} />
         <TableHeader text="Trader" width={15} />
