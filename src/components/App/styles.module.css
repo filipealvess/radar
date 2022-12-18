@@ -1,7 +1,26 @@
 .container {
 	display: flex;
+	overflow: hidden;
 }
 
 .container main {
-	flex-grow: 1;
+	flex: 1;
+  width: 0;
+	height: 100vh;
+}
+
+.container main::-webkit-scrollbar {
+  width: 10px;
+}
+
+.container main::-webkit-scrollbar-track {
+  background-color: #2E3F4C;
+}
+
+.container main::-webkit-scrollbar-thumb {
+  background-color: #1F2D37;
+}
+
+.container main::-webkit-scrollbar-thumb:hover {
+  background-color: #0D151A;
 }
