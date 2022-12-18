@@ -21,8 +21,9 @@ export const alertsSlice = createSlice({
     search(state, { payload }) {
       const values = state.values.map((alert) => {
         const title = alert.title.toLowerCase();
+        const term = payload.toLowerCase();
 
-        return { ...alert, visible: title.includes(payload) };
+        return { ...alert, visible: title.includes(term) };
       });
 
       return { values, sort: state.sort };
