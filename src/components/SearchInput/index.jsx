@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { InputGroup, Tag } from '@blueprintjs/core';
 
+import debounce from '../../utils/debounce';
 import styles from './styles.module.css';
 
-export default function SearchInput() {
+export default function SearchInput({ onSearch }) {
+  const [inputValue, setInputValue] = useState('');
+
+  function search(event) {
+    const { value } = event.target;
+
+    setInputValue(value);
+    onSearch(value);
+  }
+
+  const handleChange = debounce(search);
+
   return (
     <InputGroup
       className={styles.container}
@@ -16,6 +28,9 @@ export default function SearchInput() {
           152
         </Tag>
       )}
+      value={inputValue}
+      asyncControl={true}
+      onChange={handleChange}
     />
   );
 }

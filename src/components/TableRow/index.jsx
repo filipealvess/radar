@@ -16,9 +16,10 @@ function Text({ width, children, bold }) {
 }
 
 export default function TableRow({ data }) {
+  const style = { display: data.visible ? 'flex' : 'none' };
 
   return (
-    <Card className={styles.container}>
+    <Card className={styles.container} style={style}>
       <Text width={25} bold={true}>{data.title}</Text>
 
       <div style={{ width: '6%', textAlign: 'center' }}>
