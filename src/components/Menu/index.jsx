@@ -1,13 +1,24 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { InputGroup } from '@blueprintjs/core';
 
-import list from '../../controllers/propertiesController';
+import { search as searchFunction } from '../../store/reducers/filtersReducer';
 import Property from '../Property';
 import styles from './styles.module.css';
 
+
 export default function Menu() {
-  const [properties] = useState(list);
+  const [search, setSearch] = useState('');
+  const properties = useSelector(state => state.filters.properties);
+  const dispatch = useDispatch();
+
+  function handleChange(event) {
+    const { value } = event.target;
+
+    setSearch(value);
+    dispatch(searchFunction(value));
+  }
 
   return (
     <>
@@ -16,6 +27,8 @@ export default function Menu() {
         leftIcon="filter"
         placeholder="Find Properties..."
         className={styles.input}
+        value={search}
+        onChange={handleChange}
       />
 
       <article>
