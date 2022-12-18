@@ -1,45 +1,65 @@
 [
   {
+    "id": 1,
     "title": "BUY of $34.0M USD of LOPR on 1/29/15",
     "severity": "danger",
     "status": "ESCALATED",
-    "trader": "Prasanta Shivakrishnan",
+    "trader": {
+      "name": "Prasanta Shivakrishnan",
+      "alerts": 0
+    },
     "counterparty": "Guerra Corporation",
     "book": "PRHI-Z53",
     "source": "Bank Trading"
   },
   {
+    "id": 2,
     "title": "SELL of $836K GBP/AUD of GPB/AUD on 1/30/15",
     "severity": "warning",
     "status": "OPEN",
-    "trader": "Hugo Justice",
+    "trader": {
+      "name": "Hugo Justice",
+      "alerts": 0
+    },
     "counterparty": "VSJP-AG1K (Internal)",
     "book": "HUUS-K31",
     "source": "Bank Trading"
   },
   {
+    "id": 3,
     "title": "BUY of $2.00M GBP/USD with ERCD International on 1/30/15",
     "severity": "warning",
     "status": "CLOSED",
-    "trader": "Neville Ruben",
+    "trader": {
+      "name": "Neville Ruben",
+      "alerts": 25
+    },
     "counterparty": "ERCD International",
     "book": "NEUB-B31",
     "source": "Bank Trading"
   },
   {
+    "id": 4,
     "title": "SELL of $5.00M USD/CHF with Brown Banking on 1/30/15",
     "severity": "warning",
     "status": "CLOSED",
-    "trader": "Brandon Grover",
+    "trader": {
+      "name": "Brandon Grover",
+      "alerts": 0
+    },
     "counterparty": "Brown Banking",
     "book": "DLEF-A81",
     "source": "Bank Trading"
   },
   {
+    "id": 5,
     "title": "SELL of $1.39M EUR/USD with Guerra Corporation on 1/30/15",
     "severity": "none",
     "status": "OPEN",
-    "trader": "Prasanta Shivakrishnan",
+    "trader": {
+      "name": "Prasanta Shivakrishnan",
+      "alerts": 0
+    },
     "counterparty": "Guerra Corporation",
     "book": "NMUJ-M81",
     "source": "Bank Trading"
