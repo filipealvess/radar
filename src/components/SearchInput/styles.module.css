@@ -1,0 +1,10 @@
+.container {
+  width: 300px;
+  margin-right: 20px;
+}
+
+.tag {
+  background-color: #EAF1F5;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 300;
+}
