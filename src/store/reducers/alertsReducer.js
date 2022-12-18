@@ -17,10 +17,19 @@ export const alertsSlice = createSlice({
       const values = sortAlerts(stateObject.values, field, order);
 
       return { values, sort: payload };
+    },
+    search(state, { payload }) {
+      const values = state.values.map((alert) => {
+        const title = alert.title.toLowerCase();
+
+        return { ...alert, visible: title.includes(payload) };
+      });
+
+      return { values, sort: state.sort };
     }
   }
 });
 
-export const { sort } = alertsSlice.actions;
+export const { sort, search } = alertsSlice.actions;
 
 export default alertsSlice.reducer;
