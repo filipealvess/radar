@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.text {
+  color: #474F53;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 400;
+}
+
+.status {
+	border: #D2DCE2 solid 2px;
+  border-radius: 3px;
+	background-color: #FFFFFF;
+	color: #738091;
+  font-family: 'Rubik', sans-serif;
+	font-weight: 600;
+}
+
+.tag {
+  margin-left: 10px;
+  background-color: #EAF1F5;
+}
+
+.tag * {
+  color: #474f53;
+  font-family: 'Rubik', sans-serif;
+}
