@@ -16,19 +16,15 @@ export const alertsSlice = createSlice({
       const filtersValues = Object.values(payload);
 
       const values = state.values.map(alert => {
-        let isVisible = true;
-
-        filters.forEach((filter, index) => {
+        const isVisible = filters.reduce((visible, filter, index) => {
           const filterType = filtersValues[index].type;
           const filterOptions = filtersValues[index].options;
           const alertProp = alert[filter].toLowerCase();
+          const includesInList = filterType === 'list' && filterOptions.includes(alertProp);
+          const includesTerm = filterType === 'term' && alertProp.includes(filterOptions[0]);
 
-          if (filterType === 'list') {
-            isVisible = filterOptions.includes(alertProp);
-          } else if (filterType === 'term') {
-            isVisible = alertProp.includes(filterOptions[0]);
-          }
-        });
+          return includesInList || includesTerm ? visible : false;
+        }, true);
 
         return { ...alert, visible: isVisible };
       });
@@ -41,16 +37,6 @@ export const alertsSlice = createSlice({
       const values = sortAlerts(stateObject.values, field, order);
 
       return { values, sort: payload };
-    },
-    search(state, { payload }) {
-      const values = state.values.map((alert) => {
-        const title = alert.title.toLowerCase();
-        const term = payload.toLowerCase();
-
-        return { ...alert, visible: title.includes(term) };
-      });
-
-      return { values, sort: state.sort };
     }
   }
 });

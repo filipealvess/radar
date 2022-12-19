@@ -10,9 +10,8 @@ export const filtersSlice = createSlice({
   },
   reducers: {
     addFilter(state, { payload }) {
-      const stateObject = JSON.parse(JSON.stringify(state));
+      const { values } = JSON.parse(JSON.stringify(state));
       const { field, option, type } = payload;
-      const { values } = stateObject;
       const alreadyExists = values[field] !== undefined;
 
       if (alreadyExists) {
@@ -27,10 +26,9 @@ export const filtersSlice = createSlice({
       return { properties: state.properties, values };
     },
     removeFilter(state, { payload }) {
-      const stateObject = JSON.parse(JSON.stringify(state));
+      const { values } = JSON.parse(JSON.stringify(state));
       const { field, option } = payload;
-      const { values } = stateObject;
-      const notExists = !stateObject.values[field];
+      const notExists = !values[field];
 
       if (notExists) return state;
 
@@ -40,6 +38,19 @@ export const filtersSlice = createSlice({
 
       if (optionsAreEmpty) {
         delete values[field];
+      }
+
+      return { properties: state.properties, values };
+    },
+    replaceOrAddFilter(state, { payload }) {
+      const { values } = JSON.parse(JSON.stringify(state));
+      const { field, option, type } = payload;
+      const alreadyExists = values[field] !== undefined;
+
+      if (alreadyExists) {
+        values[field] = { ...values[field], options: [option] };
+      } else {
+        values[field] = { type, options: [option] };
       }
 
       return { properties: state.properties, values };
@@ -57,6 +68,11 @@ export const filtersSlice = createSlice({
   }
 });
 
-export const { search, addFilter, removeFilter } = filtersSlice.actions;
+export const {
+  search,
+  addFilter,
+  removeFilter,
+  replaceOrAddFilter
+} = filtersSlice.actions;
 
 export default filtersSlice.reducer;

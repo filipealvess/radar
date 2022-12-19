@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { Button, Navbar, NavbarDivider, NavbarGroup } from '@blueprintjs/core';
 
-import { search } from '../../store/reducers/alertsReducer';
+import { replaceOrAddFilter } from '../../store/reducers/filtersReducer';
 import SearchInput from '../SearchInput';
 import styles from './styles.module.css';
 
@@ -11,7 +11,13 @@ export default function Header() {
   const dispatch = useDispatch();
 
   function handleSearch(value) {
-    dispatch(search(value));
+    const term = value.toLowerCase();
+
+    dispatch(replaceOrAddFilter({
+      field: 'title',
+      option: term,
+      type: 'term'
+    }));
   }
 
   return (
