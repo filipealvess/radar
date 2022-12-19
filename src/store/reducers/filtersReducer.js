@@ -9,6 +9,41 @@ export const filtersSlice = createSlice({
     values: {}
   },
   reducers: {
+    addFilter(state, { payload }) {
+      const stateObject = JSON.parse(JSON.stringify(state));
+      const { field, option, type } = payload;
+      const { values } = stateObject;
+      const alreadyExists = values[field] !== undefined;
+
+      if (alreadyExists) {
+        values[field] = {
+          type: values[field].type,
+          options: [...values[field].options, option]
+        };
+      } else {
+        values[field] = { type, options: [option] };
+      }
+
+      return { properties: state.properties, values };
+    },
+    removeFilter(state, { payload }) {
+      const stateObject = JSON.parse(JSON.stringify(state));
+      const { field, option } = payload;
+      const { values } = stateObject;
+      const notExists = !stateObject.values[field];
+
+      if (notExists) return state;
+
+      values[field].options = values[field].options.filter(value => value !== option);
+
+      const optionsAreEmpty = values[field].options.length === 0;
+
+      if (optionsAreEmpty) {
+        delete values[field];
+      }
+
+      return { properties: state.properties, values };
+    },
     search(state, { payload }) {
       const properties = state.properties.map((property) => {
         const name = property.name.toLowerCase();
@@ -22,6 +57,6 @@ export const filtersSlice = createSlice({
   }
 });
 
-export const { search } = filtersSlice.actions;
+export const { search, addFilter, removeFilter } = filtersSlice.actions;
 
 export default filtersSlice.reducer;
