@@ -1,8 +1,10 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { Card, Icon } from '@blueprintjs/core';
 
+import { addFilter, removeFilter } from '../../store/reducers/filtersReducer';
 import Tag from '../Tag';
 import styles from './styles.module.css';
 
@@ -10,6 +12,7 @@ export default function Property({ property: { name, options, visible } }) {
   const [isOpen, setIsOpen] = useState(false);
   const [icon, setIcon] = useState('chevron-right');
   const [optionsClass, setOptionsClass] = useState(styles.hidden);
+  const dispatch = useDispatch();
   const style = { display: visible ? 'flex' : 'none' };
 
   useEffect(() => {
@@ -20,12 +23,15 @@ export default function Property({ property: { name, options, visible } }) {
   useEffect(() => {
     const newClass = (isOpen && visible) ? styles.tags : styles.hidden;
 
-    if (!visible) {
-      setIsOpen(false);
-    }
+    if (!visible) setIsOpen(false);
 
     setOptionsClass(newClass);
   }, [isOpen, visible]);
+
+  function handleTagClick(tag, func) {
+    const field = name.toLowerCase();
+    dispatch(func({ field, option: tag, type: 'list' }));
+  }
 
   return (
     <>
@@ -41,7 +47,12 @@ export default function Property({ property: { name, options, visible } }) {
 
       <section className={optionsClass}>
         {options.map((option, index) => (
-          <Tag key={index} text={option} />
+          <Tag
+            key={index}
+            text={option}
+            onTurnOn={tag => handleTagClick(tag, addFilter)}
+            onTurnOff={tag => handleTagClick(tag, removeFilter)}
+          />
         ))}
       </section>
     </>

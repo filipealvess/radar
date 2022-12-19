@@ -4,9 +4,19 @@ import { Icon, Tag as TagComponent } from '@blueprintjs/core';
 
 import styles from './styles.module.css';
 
-export default function Tag({ text }) {
+export default function Tag({ text, onTurnOn, onTurnOff }) {
   const [isSelected, setIsSelected] = useState(false);
   const [classes, setClasses] = useState([styles.container]);
+
+  function handleClick() {
+    if (isSelected) {
+      onTurnOff(text.toLowerCase());
+    } else {
+      onTurnOn(text.toLowerCase());
+    }
+
+    setIsSelected(prevState => !prevState);
+  }
 
   useEffect(() => {
     const { container, selected } = styles;
@@ -20,7 +30,7 @@ export default function Tag({ text }) {
       large={true}
       interactive={true}
       className={classes}
-      onClick={() => setIsSelected(!isSelected)}
+      onClick={handleClick}
     >
       <Icon icon={isSelected ? 'tick' : 'small-cross'} />
       <span className={styles.text}>{text}</span>
