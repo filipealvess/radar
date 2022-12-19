@@ -11,6 +11,30 @@ export const alertsSlice = createSlice({
     sort: { field: 'title', order: ASCENDING }
   },
   reducers: {
+    filter(state, { payload }) {
+      const filters = Object.keys(payload);
+      const filtersValues = Object.values(payload);
+
+      const values = state.values.map(alert => {
+        let isVisible = true;
+
+        filters.forEach((filter, index) => {
+          const filterType = filtersValues[index].type;
+          const filterOptions = filtersValues[index].options;
+          const alertProp = alert[filter].toLowerCase();
+
+          if (filterType === 'list') {
+            isVisible = filterOptions.includes(alertProp);
+          } else if (filterType === 'term') {
+            isVisible = alertProp.includes(filterOptions[0]);
+          }
+        });
+
+        return { ...alert, visible: isVisible };
+      });
+
+      return { values, sort: state.sort };
+    },
     sort(state, { payload }) {
       const stateObject = JSON.parse(JSON.stringify(state));
       const { field, order } = payload;
@@ -31,6 +55,6 @@ export const alertsSlice = createSlice({
   }
 });
 
-export const { sort, search } = alertsSlice.actions;
+export const { filter, sort, search } = alertsSlice.actions;
 
 export default alertsSlice.reducer;
